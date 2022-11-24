@@ -1,6 +1,6 @@
 # CTLowDoseChallenge
 Deblurring/Enhancing CT image
----
+
 ## Dataset
 We use 2016-Low Dose CT Grand Challenge [dataset](https://ctcicblog.mayo.edu/2016-low-dose-ct-grand-challenge/)
 Place them in the dataset directory like below. I created .npy file for each patient CT image pair in order to reduce RAM usage on training process.
