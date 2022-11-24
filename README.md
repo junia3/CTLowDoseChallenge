@@ -100,4 +100,5 @@ If you want to train network with patch based method, run following command
 python train.py --config CONFIG_NAME --patch True
 ```
 If patch based, mini-batch becomes (BATCH size) $\times$ (# of PATCHES)
+
 ![footer](https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=150&section=footer&animation=fadeIn&fontColor=FFFFFF&fontAlignY=40)
