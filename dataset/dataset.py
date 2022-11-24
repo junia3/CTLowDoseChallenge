@@ -33,7 +33,7 @@ def normalize(image):
 class CTDataset(Dataset):
     def __init__(self, mode="train", transform=None, patch=False):
         self.transform = transform
-        self.directory = f"/data/ct/dataset/{mode}_dataset"
+        self.directory = f"./dataset/{mode}_dataset"
         self.patch = patch
 
     def __len__(self):
