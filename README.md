@@ -1,5 +1,9 @@
-# CTLowDoseChallenge
-Deblurring/Enhancing CT image
+![header](https://capsule-render.vercel.app/api?type=waving&color=timeGradient:F39F86&height=250&section=header&text=CT%20Imaging%20Project&fontSize=45&animation=fadeIn&fontColor=FFFFFF&fontAlignY=40)
+<!-- 
+<p align="center"><a href="#">
+    <img src="https://capsule-render.vercel.app/api?type=waving&color=0:F9D976,100:F39F86&height=250&section=header&text="CT Imaging" &fontSize=40&animation=fadeIn&fontColor=FFFFFF&fontAlignY=40" alt="header" />
+</a></p>
+ -->
 
 ## Dataset
 We use 2016-Low Dose CT Grand Challenge [dataset](https://ctcicblog.mayo.edu/2016-low-dose-ct-grand-challenge/)
@@ -71,3 +75,5 @@ which is same with mobileNet implementation code. Kernel size and the number of 
 
 ### SRResNet
 SRResNet is super-resolution specified residual network.
+
+![footer](https://capsule-render.vercel.app/api?type=waving&color=timeGradient:F39F86&height=150&section=footer&animation=fadeIn&fontColor=FFFFFF&fontAlignY=40)
