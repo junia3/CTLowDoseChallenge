@@ -91,5 +91,13 @@ train:
   optim: 'adamw'
   scheduler: {'MultiStepLR': {"milestones": [20, 40, 60, 80], "gamma": 0.2}}
 ```
-
+And run following command on terminal, that's all.
+```bash
+python train.py --config CONFIG_NAME
+```
+If you want to train network with patch based method, run following command
+```bash
+python train.py --config CONFIG_NAME --patch True
+```
+If patch based, mini-batch becomes (BATCH size) $\times$ (# of PATCHES)
 ![footer](https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=150&section=footer&animation=fadeIn&fontColor=FFFFFF&fontAlignY=40)
