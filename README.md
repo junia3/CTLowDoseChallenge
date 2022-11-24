@@ -76,4 +76,20 @@ which is same with mobileNet implementation code. Kernel size and the number of 
 ### [SRResNet](./models/srresnet.py)
 SRResNet is super-resolution specified residual network.
 
+## Training
+You should configure training setup like below.
+```yaml
+dataset:
+  batch: BATCH_SIZE
+  image_size: IMAGE_RESOLUTION
+train:
+  model: MODEL_NAME
+  lr: INITIAL_LEARNING_RATE
+  epochs: 100
+  val_iters: 100
+  loss: {'mse':1}
+  optim: 'adamw'
+  scheduler: {'MultiStepLR': {"milestones": [20, 40, 60, 80], "gamma": 0.2}}
+```
+
 ![footer](https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=150&section=footer&animation=fadeIn&fontColor=FFFFFF&fontAlignY=40)
