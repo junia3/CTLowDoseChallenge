@@ -6,7 +6,7 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 import yaml
 from tqdm import tqdm
 from torch.utils.data import DataLoader, random_split
-#import pytorch_model_summary
+import pytorch_model_summary
 import torchvision.transforms as transforms
 
 from dataset.dataset import CTDataset
@@ -16,27 +16,13 @@ from loss import *
 from visualize_test import *
 
 def train(cfg, args, save_results=True):
-    '''Function for training face blur detection model'''
-
-    ##########################################################
-    #                     configuration                      #
-    ##########################################################
-
-    # (0) : global
     patch = args.patch
-
     device = args.device
 
-    # (1) : dataset
     batch_size = cfg['dataset']['batch']
     img_size = cfg['dataset']['image_size']
 
-    # (2) : training
     model_name = cfg['train']['model']
-
-    ##########################################################
-    #                     Dataloader                         #
-    ##########################################################
     transform_train = transforms.Compose([
         transforms.RandomHorizontalFlip(0.5),
         transforms.RandomVerticalFlip(0.5),
@@ -54,39 +40,24 @@ def train(cfg, args, save_results=True):
     # Dataloaders
     train_dataloader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
     val_dataloader = DataLoader(val_dataset, batch_size=batch_size, shuffle=False)
-
-    ##########################################################
-    #                     Build Model                        #
-    ##########################################################
-
     model = model_build(model_name=model_name)
-    #print("Model configuration : ")
-    #print(pytorch_model_summary.summary(model,
-    #                            torch.zeros(batch_size, 1, img_size, img_size),
-    #                            show_input=True))
+    print("Model configuration : ")
+    print(pytorch_model_summary.summary(model,
+                                torch.zeros(batch_size, 1, img_size, img_size),
+                                show_input=True))
 
 
-    # (0) : Loss function
     loss_func = build_loss_func(cfg['train']['loss'], device=device)
 
-    # (1) : Optimizer & Scheduler
     optimizer = build_optim(cfg, model)
     scheduler = build_scheduler(cfg, optimizer)
     epochs = cfg['train']['epochs']
 
-    # (2) : Device setting
     if 'cuda' in device and torch.cuda.is_available():
         model = model.to(device)
 
-    # (3) : Create directory to save checkpoints
     os.makedirs(f'checkpoint/{args.config}/', exist_ok=True)
-
-    ##########################################################
-    #                     START TRAINING !!                  #
-    ##########################################################
     for epoch in range(epochs):
-
-        # (0) : Training
         training_loss = 0.0
         model.train()
         loading = tqdm(enumerate(train_dataloader), desc="training...")
@@ -109,8 +80,7 @@ def train(cfg, args, save_results=True):
 
         print(f"Epoch #{epoch + 1} >>>> Training loss : {training_loss / len(train_dataloader):.6f}")
         scheduler.step()
-        '''
-        # (1): Evaluation
+
         model.eval()
         with torch.no_grad():
             validation_loss = 0.0
@@ -121,7 +91,7 @@ def train(cfg, args, save_results=True):
                 validation_loss += loss.item()
 
             print(f"Epoch #{epoch + 1} >>>> Validation loss : {validation_loss / len(val_dataloader):.6f}")
-        '''
+        
         torch.save(
             {
                 "model_state_dict": model.state_dict(),
