@@ -35,15 +35,15 @@ After run 'create_npy.py', you can just remove redundant directory files.
 
 ## Model
 I am currently on project, so there are only baseline models.
-### 1. U-Net
+### 1. [U-Net](./models/unet.py)
 The most basic model in pixel-to pixel prediction task such as segmentation, deblurring, image enhancement, ... etc.
 I referenced on [pytorch official code](https://github.com/mateuszbuda/brain-segmentation-pytorch).
 
-### 2. [REDCNN](https://arxiv.org/pdf/1702.00288.pdf)
+### 2. [REDCNN](./models/redcnn.py)
 
-RED-CNN is a good reference model in CT image enhancement. However the model was too heavy to train(high spatial dimension with 96 channels for each layer). Therefore I applied additional trick on this model, which is named "REDCNN-Lite"
+[RED-CNN]((https://arxiv.org/pdf/1702.00288.pdf)) is a good reference model in CT image enhancement. However the model was too heavy to train(high spatial dimension with 96 channels for each layer). Therefore I applied additional trick on this model, which is named "REDCNN-Lite"
 
-### 3. REDCNN-Lite
+### 3. [REDCNN-Lite](./models/redcnn.py)
 All convolutional layers and transposed convolutional layers are replaced with depthwise-separable convolution and deconvolution layers.
 The separable convolution layers implemented with pytorch is,
 ```python
@@ -73,7 +73,7 @@ class depthwise_separable_trconv(nn.Module):
 ```
 which is same with mobileNet implementation code. Kernel size and the number of kernel is slightly changed.
 
-### SRResNet
+### [SRResNet](./models/srresnet.py)
 SRResNet is super-resolution specified residual network.
 
 ![footer](https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=150&section=footer&animation=fadeIn&fontColor=FFFFFF&fontAlignY=40)
