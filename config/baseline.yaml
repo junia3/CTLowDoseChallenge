@@ -6,6 +6,6 @@ train:
   lr: 0.005
   epochs: 100
   val_iters: 100
-  loss: {'mse':1}   # same as WeightedMSELoss
+  loss: {'mse':1}
   optim: 'adamw'
   scheduler: {'MultiStepLR': {"milestones": [20, 40, 60, 80], "gamma": 0.2}}
